@@ -4,7 +4,7 @@ from tqdm import tqdm
 import random
 import pickle
 import numpy as np
-from LMM import GPT4VAPI, GeminiAPI
+from LMM_with_qwen2vl import Qwen2VLAPI
 
 
 def work(
@@ -38,14 +38,15 @@ def work(
     """
 
     class_to_idx = {class_name: idx for idx, class_name in enumerate(classes)}
-    EXP_NAME = f"{dataset_name}_{num_shot_per_class*len(classes)}shot_{model}_{num_qns_per_round}"
+    EXP_NAME = f"{dataset_name}"
 
-    if model.startswith("gpt"):
-        api = GPT4VAPI(model=model, detail=detail)
-    else:
-        assert model == "Gemini1.5"
-        api = GeminiAPI(location=location)
-    print(EXP_NAME, f"test size = {len(test_df)}")
+    #if model.startswith("qwen"):
+        #api = GPT4VAPI(model=model, detail=detail)
+    api = Qwen2VLAPI(model=model, detail=detail)
+    #else:
+    #    assert model == "Gemini1.5"
+    #    api = GeminiAPI(location=location)
+    #print(EXP_NAME, f"test size = {len(test_df)}")
 
     # Prepare the demonstrating examples
     demo_examples = []
