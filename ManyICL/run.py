@@ -17,7 +17,7 @@ if __name__ == "__main__":
         "--model",
         type=str,
         required=False,
-        default="Gemini1.5",
+        default="Qwen/Qwen2-VL-7B-Instruct-GPTQ-Int4",
         help="The model to use",
     )
     parser.add_argument(
@@ -52,11 +52,11 @@ if __name__ == "__main__":
     num_qns_per_round = args.num_qns_per_round
 
     # Folder to load the images, and this will be prepended to the filename stored in the index column of the dataframe.
-    IMAGE_FOLDER = f"ManyICL/dataset/{dataset_name}/images"
+    IMAGE_FOLDER = f"./dataset/{dataset_name}/images"
 
     # Read the two dataframes for the dataset
-    demo_df = pd.read_csv(f"ManyICL/dataset/{dataset_name}/demo.csv", index_col=0)
-    test_df = pd.read_csv(f"ManyICL/dataset/{dataset_name}/test.csv", index_col=0)
+    demo_df = pd.read_csv(f"./dataset/{dataset_name}/demo.csv", index_col=0)
+    test_df = pd.read_csv(f"./dataset/{dataset_name}/test.csv", index_col=0)
 
     classes = list(demo_df.columns)  # classes for classification
     class_desp = classes  # The actual list of options given to the model. If the column names are informative enough, we can just use them.
